@@ -95,7 +95,15 @@ services:
     volumes:
       - "./volumes/tyk-identity-broker/tib.conf:/opt/tyk-identity-broker/tib.conf"
       - "./volumes/tyk-identity-broker/profiles.json:/opt/tyk-identity-broker/profiles.json"
-        
+  jenkins:
+    image: jenkins/jenkins:lts-alpine
+    ports:
+      - "8082:8080"
+    networks:
+      - tyk
+    volumes:
+      - ./jenkins_home:/var/jenkins_home   
+
 volumes:
   redis-data:
   mongo-data:

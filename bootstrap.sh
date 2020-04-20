@@ -3,6 +3,8 @@
 dashboard_base_url="http://localhost:3000"
 gateway_base_url="http://localhost:8080"
 kibana_base_url="http://localhost:5601"
+jenkins_base_url="http://localhost:8082"
+jenkins_admin_password=$(cat ./jenkins_home/secrets/initialAdminPassword)
 
 echo "Making scripts executable"
 chmod +x dump.sh
@@ -173,5 +175,9 @@ Gateway
 
 Kibana
   URL : $kibana_base_url
+
+Jenkins
+  URL      : $jenkins_base_url
+  Password : $jenkins_admin_password
 
 EOF

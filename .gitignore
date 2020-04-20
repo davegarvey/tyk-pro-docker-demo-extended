@@ -1,4 +1,4 @@
 .env
 .organisation-id
 .dashboard-user-api-credentials
-/jenkins-home
+/jenkins_home

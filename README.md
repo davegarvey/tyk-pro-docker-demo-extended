@@ -24,8 +24,6 @@ docker-compose up -d
 
 Please note that this command may take a while to complete, as Docker needs to download images and provision the containers.
 
--d : runs in daemon-mode
-
 ## Step 3: Install dependencies
 
 ### Tyk Sync
