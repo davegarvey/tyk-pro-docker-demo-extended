@@ -24,6 +24,8 @@ docker-compose up -d
 
 Please note that this command may take a while to complete, as Docker needs to download images and provision the containers.
 
+-d : runs in daemon-mode
+
 ## Step 3: Install dependencies
 
 ### Tyk Sync
@@ -50,7 +52,7 @@ Now we will run the bootstrap script, which will complete the remaining items ne
 chmod +x bootstrap.sh
 ```
 
-Now you can run the file, passing the admin user's `Tyk Dashboard API Access Credentials` and `Organisation ID` as arguments:
+Now you can run the file, which will output the admin user's `Tyk Dashboard API Access Credentials` and `Organisation ID` as a result:
 
 ```
 ./bootstrap.sh
