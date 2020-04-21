@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d727d88f-14c8-4382-97ca-b66c41a44895",
+		"_postman_id": "03c2bc6e-6ff9-4298-b9a4-de2350ae842f",
 		"name": "Tyk Demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -280,6 +280,168 @@
 					"response": []
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Basic Security",
+			"item": [
+				{
+					"name": "Token authorization - failure",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/basic-security-api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basic-security-api",
+								""
+							]
+						},
+						"description": "This API will showcase the Token authorization feature of Tyk.\n\nToken (Key) will not be sent in the HTTP header field `Authorization` resulting in HTTP status code `401 Unauthorized` by gateway."
+					},
+					"response": []
+				},
+				{
+					"name": "Token authorization - success",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjIxOGI1NjFiNzc3NTRlMDc4NGUyNGU1NDdjMWVhYWE3IiwiaCI6Im11cm11cjY0In0=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/basic-security-api/get?Key1=Value1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basic-security-api",
+								"get"
+							],
+							"query": [
+								{
+									"key": "Key1",
+									"value": "Value1"
+								}
+							]
+						},
+						"description": "This API will showcase the Token authorization feature of Tyk.\n\nToken (Key) will be sent in the HTTP header field `Authorization`."
+					},
+					"response": []
+				},
+				{
+					"name": "Rate Limit",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6ImMyMjdiM2MwZjg2YTQxNTQ5NTZlYmMyMTBmM2Q0YmFkIiwiaCI6Im11cm11cjY0In0=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/basic-security-api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basic-security-api",
+								""
+							]
+						},
+						"description": "This API will showcase the Rate limiting feature of Tyk.\n\nRate limit is set as 2 per 5 seconds. More than 2 request per 5 will result in `429  Too many requests` error from gateway."
+					},
+					"response": []
+				},
+				{
+					"name": "Throttling",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0="
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/basic-security-api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basic-security-api",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0=",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This API will showcase the Throttling feature of Tyk.\n\nRate limit is set as 2 per 5 seconds. Gateway Throttling is configured for 10 times with 1 sec interval. \n\nWe can obeserve a delay in response due to throttling after the rate limit has reached."
+					},
+					"response": []
+				},
+				{
+					"name": "Quota Limit",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0="
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/basic-security-api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"basic-security-api",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0=",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This API will showcase the Quota limiting feature of Tyk.\n\nQuota limit is set as 2 per hour. More than 2 request per hour will result in `403 Forbidden` error from gateway."
+					},
+					"response": []
+				}
+			],
+			"description": "Collectiong of API's to demo basic security options.\n- Rate Limiting\n- Throttling\n- IP based Filtering",
 			"protocolProfileBehavior": {}
 		}
 	],
