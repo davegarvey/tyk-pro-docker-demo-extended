@@ -1,5 +1,5 @@
 {
-  "id": "5e9ea8cc980e040001e39fb4",
+  "id": "5e9f21b85aa94100010ebeaa",
   "name": "Basic Security API",
   "slug": "basic-security-api",
   "api_id": "76574617b2f94d867f062eb94a8ab841",
@@ -103,7 +103,7 @@
   "proxy": {
     "preserve_host_header": false,
     "listen_path": "/basic-security-api/",
-    "target_url": "http://httpbin.org/",
+    "target_url": "http://httpbin/",
     "disable_strip_slash": false,
     "strip_listen_path": true,
     "enable_load_balancing": false,
