@@ -1,4 +1,5 @@
 .env
 .organisation-id
 .dashboard-user-api-credentials
+.DS_Store
 /jenkins_home
