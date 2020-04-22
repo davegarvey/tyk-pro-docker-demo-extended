@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "33b7c60f-1a42-4eec-af5f-3539ca0786eb",
+		"_postman_id": "6542758e-99cd-4aba-86ef-296bce8106d1",
 		"name": "Tyk Demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -58,33 +58,33 @@
 					},
 					"response": []
 				},
-        {
-          "name": "Cache",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "x-api-version",
-                "type": "text",
-                "value": "Default"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/plugin-demo-api/uuid",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "plugin-demo-api",
-                "uuid"
-              ]
-            },
-            "description": "This request uses the `Cache` Endpoint Designer plugin to return a cached response directly from the Gateway when the API endpoint is called.\n\n- Global Cache is enabled\n- Response from Upstream will be cached for 5 seconds\n\n\nWhen this API executed, the response from upstream API server will be cached and served for upto 5 seconds to the subsequest requests made to same Endpoint.\n\nThis plugin is defined in the Endpoint Designer of the API Definition. It is set to execute on requests for the `Default` version of the API only."
-          },
-          "response": []
-        }
+				{
+					"name": "Cache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-version",
+								"type": "text",
+								"value": "Default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/plugin-demo-api/uuid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"plugin-demo-api",
+								"uuid"
+							]
+						},
+						"description": "This request uses the `Cache` Endpoint Designer plugin to return a cached response directly from the Gateway when the API endpoint is called.\n\n- Global Cache is enabled\n- Response from Upstream will be cached for 5 seconds\n\n\nWhen this API executed, the response from upstream API server will be cached and served for upto 5 seconds to the subsequest requests made to same Endpoint.\n\nThis plugin is defined in the Endpoint Designer of the API Definition. It is set to execute on requests for the `Default` version of the API only."
+					},
+					"response": []
+				}
 			],
 			"protocolProfileBehavior": {}
 		},
@@ -346,12 +346,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjIxOGI1NjFiNzc3NTRlMDc4NGUyNGU1NDdjMWVhYWE3IiwiaCI6Im11cm11cjY0In0=",
+								"value": "auth_key",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/basic-security-api/get?Key1=Value1",
+							"raw": "http://localhost:8080/basic-security-api/get",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,12 +360,6 @@
 							"path": [
 								"basic-security-api",
 								"get"
-							],
-							"query": [
-								{
-									"key": "Key1",
-									"value": "Value1"
-								}
 							]
 						},
 						"description": "This API will showcase the Token authorization feature of Tyk.\n\nToken (Key) will be sent in the HTTP header field `Authorization`."
@@ -379,7 +373,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6ImMyMjdiM2MwZjg2YTQxNTQ5NTZlYmMyMTBmM2Q0YmFkIiwiaCI6Im11cm11cjY0In0=",
+								"value": "ratelimit_key",
 								"type": "text"
 							}
 						],
@@ -407,7 +401,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0="
+								"value": "throttle_key"
 							}
 						],
 						"url": {
@@ -420,13 +414,6 @@
 							"path": [
 								"basic-security-api",
 								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0=",
-									"disabled": true
-								}
 							]
 						},
 						"description": "This API will showcase the Throttling feature of Tyk.\n\nRate limit is set as 2 per 5 seconds. Gateway Throttling is configured for 10 times with 1 sec interval. \n\nWe can obeserve a delay in response due to throttling after the rate limit has reached."
@@ -441,7 +428,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0="
+								"value": "quota_key"
 							}
 						],
 						"url": {
@@ -454,13 +441,6 @@
 							"path": [
 								"basic-security-api",
 								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": "eyJvcmciOiI1ZTlkOTU0NGExZGNkNjAwMDFkMGVkMjAiLCJpZCI6IjE5NzFmYTMyNGNmMTRjZmM5YmZkZWRhYmNiOWM4NDBiIiwiaCI6Im11cm11cjY0In0=",
-									"disabled": true
-								}
 							]
 						},
 						"description": "This API will showcase the Quota limiting feature of Tyk.\n\nQuota limit is set as 2 per hour. More than 2 request per hour will result in `403 Forbidden` error from gateway."
