@@ -106,7 +106,7 @@ curl $dashboard_base_url/api/portal/developers \
   --data '{
       "email": "'$portal_user_email'",
       "password": "'$portal_user_password'",
-      "org_id": "'$organisation_id'"   
+      "org_id": "'$organisation_id'"
     }' \
   > /dev/null
 echo "  Done"
@@ -134,7 +134,7 @@ kibana_status=""
 while [ "$kibana_status" != "200" ]
 do
   kibana_status=$(curl -I $kibana_base_url/app/kibana 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-  
+
   if [ "$kibana_status" != "200" ]
   then
     echo "  Kibana not ready yet - retrying in 5 seconds..."
@@ -159,6 +159,16 @@ curl $kibana_base_url/api/saved_objects/visualization/407e91c0-8168-11ea-9323-29
   > /dev/null
 echo "  Done"
 
+
+echo "Importing keys"
+gateway_key=$(cat ./volumes/tyk-gateway/tyk.conf | jq -r .secret)
+curl $gateway_base_url/tyk/keys/auth_key -H "x-tyk-authorization: $gateway_key" -H "Content-Type: application/json"  -d @./tyk-sync-data/auth_key.json
+curl $gateway_base_url/tyk/keys/ratelimit_key -H "x-tyk-authorization: $gateway_key" -H "Content-Type: application/json"  -d @./tyk-sync-data/ratelimit_key.json
+curl $gateway_base_url/tyk/keys/throttle_key -H "x-tyk-authorization: $gateway_key" -H "Content-Type: application/json"  -d @./tyk-sync-data/throttle_key.json
+curl $gateway_base_url/tyk/keys/quota_key -H "x-tyk-authorization: $gateway_key" -H "Content-Type: application/json"  -d @./tyk-sync-data/quota_key.json
+
+echo "done"
+
 echo "Making test call to Bootstrap API"
 bootstrap_api_status=$(curl -I $gateway_base_url/bootstrap-api/get 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 if [ "$bootstrap_api_status" != "200" ]
@@ -172,20 +182,20 @@ echo "Bootstrap complete"
 
 cat <<EOF
 
-            #####################                  ####               
-            #####################                  ####               
-                    #####                          ####               
-  /////////         #####    ((.            (((    ####          (((  
-  ///////////,      #####    ####         #####    ####       /####   
-  ////////////      #####    ####         #####    ####      #####    
-  ////////////      #####    ####         #####    ##############     
-    //////////      #####    ####         #####    ##############     
-                    #####    ####         #####    ####      ,####    
-                    #####    ##################    ####        ####   
-                    #####      ########## #####    ####         ####  
-                                         #####                        
-                             ################                         
-                               ##########/                            
+            #####################                  ####
+            #####################                  ####
+                    #####                          ####
+  /////////         #####    ((.            (((    ####          (((
+  ///////////,      #####    ####         #####    ####       /####
+  ////////////      #####    ####         #####    ####      #####
+  ////////////      #####    ####         #####    ##############
+    //////////      #####    ####         #####    ##############
+                    #####    ####         #####    ####      ,####
+                    #####    ##################    ####        ####
+                    #####      ########## #####    ####         ####
+                                         #####
+                             ################
+                               ##########/
 
 Dashboard
   URL      : $dashboard_base_url
